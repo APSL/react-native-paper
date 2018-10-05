@@ -27,6 +27,7 @@ import TextExample from './TextExample';
 import TextInputExample from './TextInputExample';
 import TouchableRippleExample from './TouchableRippleExample';
 import type { Theme } from 'react-native-paper/types';
+import BottomSheetExample from './BottomSheetExample';
 
 type Props = {
   theme: Theme,
@@ -57,6 +58,7 @@ export const examples = {
   text: TextExample,
   textInput: TextInputExample,
   touchableRipple: TouchableRippleExample,
+  bottomSheet: BottomSheetExample,
 };
 
 const data = Object.keys(examples).map(id => ({ id, data: examples[id] }));

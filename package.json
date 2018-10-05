@@ -45,7 +45,9 @@
     "color": "^2.0.1",
     "create-react-context": "^0.2.2",
     "hoist-non-react-statics": "^2.5.0",
-    "react-lifecycles-compat": "^3.0.4"
+    "react-lifecycles-compat": "^3.0.4",
+    "react-native-gesture-handler": "^1.0.7",
+    "react-native-reanimated": "^1.0.0-alpha.9"
   },
   "devDependencies": {
     "@types/react": "^16.4.14",
