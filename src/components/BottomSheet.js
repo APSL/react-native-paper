@@ -1,8 +1,8 @@
 /* @flow */
 
 import * as React from 'react';
-import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
-import { List } from 'react-native-paper';
+import { View, StyleSheet, Text, Dimensions } from 'react-native';
+import { List, TouchableRipple } from 'react-native-paper';
 
 type Props = {};
 type State = {};
@@ -18,50 +18,62 @@ class BottomSheet extends React.Component<Props, State> {
     // TODO: onLayout
   };
 
-  renderOptions = (options: Array<Object>) =>
-    options.map((item, index) => (
-      <View style={{ flexDirection: 'column' }} key={`option-${index + 1}`}>
-        <TouchableOpacity onPress={item.onPress}>
-          <View style={styles.item}>
-            <List.Icon icon={item.icon} />
-            <Text style={[styles.text, { fontFamily: this.props.fontFamily }]}>
-              {item.title}
-            </Text>
-          </View>
-        </TouchableOpacity>
-      </View>
-    ));
-
-  renderTitle() {
-    const { title, titleStyle } = this.props;
-
-    if (!title) {
-      return;
-    }
-    return <Text style={[styles.title, titleStyle]}>{title}</Text>;
-  }
-
   render() {
     const options = [
       {
-        title: 'Favorite',
-        icon: 'favorite',
-        onPress: () => null,
-      },
-      {
-        title: 'Share with contact',
+        title: 'Share',
         icon: 'share',
         onPress: () => null,
       },
       {
-        title: 'Search',
-        icon: 'search',
+        title: 'Get link',
+        icon: 'link',
+        onPress: () => null,
+      },
+      {
+        title: 'Edit name',
+        icon: 'edit',
+        onPress: () => null,
+      },
+      {
+        title: 'Delete collection',
+        icon: 'delete',
         onPress: () => null,
       },
     ];
+
+    const { titleStyle, title } = this.props;
+    const { height } = Dimensions.get('window').height;
+
     return (
-      <View style={styles.container} onLayout={this.onLayout}>
-        {this.renderOptions(options)}
+      <View
+        style={[
+          styles.container,
+          {
+            minHeight: 0,
+            maxHeight: height / 2, // 0,
+          },
+        ]}
+        onLayout={this.onLayout}
+      >
+        {this.props.title ? (
+          <Text style={[styles.title, titleStyle]}>{title}</Text>
+        ) : null}
+        {options.map((item, index) => (
+          <View
+            style={{
+              flexDirection: 'column',
+            }}
+            key={`option-${index + 1}`}
+          >
+            <TouchableRipple onPress={item.onPress}>
+              <View style={styles.item}>
+                <List.Icon icon={item.icon} color="grey" />
+                <Text style={[styles.text]}>{item.title}</Text>
+              </View>
+            </TouchableRipple>
+          </View>
+        ))}
       </View>
     );
   }
@@ -74,25 +86,22 @@ const styles = StyleSheet.create({
     bottom: 0,
     borderWidth: 2,
     borderColor: 'red',
-    backgroundColor: 'white',
+    backgroundColor: '#FFFFFF',
+    overflow: 'hidden',
   },
   text: {
     paddingLeft: 32,
-    textAlignVertical: 'center',
-    color: '#000',
-    opacity: 0.87,
+    color: '#000000',
   },
   item: {
     flexDirection: 'row',
-    height: 48,
+    height: 48, // 48
     alignItems: 'center',
-    paddingHorizontal: 16,
   },
   title: {
-    height: 42,
     color: '#000',
-    opacity: 0.54,
-    marginLeft: 16,
+    opacity: 0.84,
+    padding: 16,
   },
 });
 

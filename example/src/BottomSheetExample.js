@@ -22,6 +22,7 @@ class BottomSheetExample extends React.Component<{}> {
           ref={(ref: any) => {
             this._bottomSheet = ref;
           }}
+          title="Select an option"
         />
       </View>
     );
